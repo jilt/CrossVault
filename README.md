@@ -1,2 +1,2 @@
 # defi-tool
-DeFi rewards tool for the Varda play to earn game
+DeFi Dashboard and flashloan/arbitrage bot for Varda NFT owners on Solana
