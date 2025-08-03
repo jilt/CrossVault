@@ -1,0 +1,68 @@
+{
+  "from": {
+    "symbol": "OSMO",
+    "logo": "/images/osmo.png",
+    "denom": "uosmo",
+    "decimals": 6
+  },
+  "to": {
+    "symbol": "OSMO",
+    "logo": "/images/osmo.png",
+    "denom": "uosmo",
+    "decimals": 6
+  },
+  "steps": [
+    {
+      "poolId": "1249",
+      "swapFee": "0.002",
+      "fromToken": {
+        "symbol": "OSMO",
+        "logo": "/images/osmo.png",
+        "denom": "uosmo",
+        "decimals": 6
+      },
+      "toToken": {
+        "symbol": "TIA",
+        "logo": "/images/tia.png",
+        "denom": "ibc/D79E7D83AB399BFFF93433E54FAA480C191248FC556924A2A8351AE2638B3877",
+        "decimals": 6
+      },
+      "poolProvider": "Intermediary Pool",
+      "error": "Intermediary pool data missing or has invalid numeric ID"
+    },
+    {
+      "poolId": "1247",
+      "swapFee": "0.0005",
+      "fromToken": {
+        "symbol": "TIA",
+        "logo": "/images/tia.png",
+        "denom": "ibc/D79E7D83AB399BFFF93433E54FAA480C191248FC556924A2A8351AE2638B3877",
+        "decimals": 6
+      },
+      "toToken": {
+        "symbol": "USDC",
+        "logo": "/images/usdc.png",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4",
+        "decimals": 6
+      },
+      "poolProvider": "Baseline Pair"
+    },
+    {
+      "poolId": "1335",
+      "swapFee": "0.002",
+      "fromToken": {
+        "symbol": "USDC",
+        "logo": "/images/usdc.png",
+        "denom": "ibc/498A0751C798A0D9A389AA3691123DADA57DAA4FE165D5C75894505B876BA6E4",
+        "decimals": 6
+      },
+      "toToken": {
+        "symbol": "OSMO",
+        "logo": "/images/osmo.png",
+        "denom": "uosmo",
+        "decimals": 6
+      },
+      "poolProvider": "Target Pair (with OSMO)"
+    }
+  ]
+}
