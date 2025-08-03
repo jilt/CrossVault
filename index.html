@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WW bot pair data</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material-Icons">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto:wght@400;500&display=swap"
+          rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/9.1.2/bignumber.min.js" integrity="sha512-9JMv6qShmz4L6iAvMaEoIaFtS4XGSk/jeTSR2vzieg0XS5njYvBvYk0YcvI59dLN/0B+QnG5HfGR+Mqubl78SA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>        <script src="./fetchData.js"></script>
+        <script src="./wrapAllOsmoJson.js"></script>
+        <script src="./wrapBaseOsmoJson.js"></script>
+        <script src="./wrapPairOsmoJson.js"></script>
+        <script src="./wrapJson.js"></script>
+        <script src="./modal.js"></script>
+</head>
+<body>
+    <div class="mobile-container">
+        <header class="mobile-header">
+            <div class="menu-icon" onclick="toggleMenu()">
+                <i class="material-icons">menu</i>
+            </div>
+            <h1>WW bot pair data</h1>
+            <button class="connect-wallet-button" onclick="connectWallet()">Connect Wallet</button>
+        </header>
+
+        <aside class="mobile-menu">
+            <div class="menu-items">
+                </div>
+            <div class="menu-settings" onclick="openModal()">
+                <i class="material-icons">settings</i> Settings
+            </div>
+        </aside>
+
+        <main class="mobile-content">
+            <div id="tokenGridContainer">
+                </div>
+            <div id="pairData" style="display: none;">
+                </div>
+        </main>
+
+        <div id="settingsModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal()">&times;</span>
+                <h2>Modify Tokens</h2>
+                <textarea id="tokenList" placeholder="Enter tokens separated by new lines"></textarea>
+                <button onclick="saveTokens()">Save Tokens</button>
+            </div>
+        </div>
+    </div>
+    <script src="./displayGrid.js"></script>
+    <script>
+        async function displayMenuTokens() {
+            menuItemsContainer.innerHTML = ''; // Clear existing items
+            let firstValidToken = null;
+
+            for (const token of tokens) {
+                const { dexscreenerData } = await window.fetchAllPoolDataForToken(token);
+                if (dexscreenerData && dexscreenerData.pairs && dexscreenerData.pairs.length > 0) {
+                    const menuItem = document.createElement('div');
+                    menuItem.classList.add('menu-item');
+                    menuItem.textContent = dexscreenerData.pairs[0].baseToken.symbol;
+                    menuItem.onclick = () => displayGridForToken(token);
+                    menuItemsContainer.appendChild(menuItem);
+                    if (!firstValidToken) {
+                        firstValidToken = { element: menuItem, token: token };
+                    }
+                } else {
+                    const menuItem = document.createElement('div');
+                    menuItem.classList.add('menu-item-error');
+                    menuItem.textContent = `Error: ${token.substring(0, 8)}...`;
+                    menuItemsContainer.appendChild(menuItem);
+                }
+            }
+
+            // Select and display the first valid token's data
+            if (firstValidToken) {
+                // Add a class to highlight the selected menu item (optional)
+                firstValidToken.element.classList.add('selected');
+                displayGridForToken(firstValidToken.token);
+            }
+        }
+
+        displayMenuTokens(); // Initial display of menu tokens
+
+
+    </script>
+</body>
+</html>

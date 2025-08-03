@@ -1,0 +1,314 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex; /* Enable flexbox for overall layout */
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    margin: 10px 0 20px 0; /* Added bottom margin */
+    font-size: 1.5rem;
+    flex-grow: 1; /* Allow it to take up space in the header */
+}
+
+.mobile-container {
+    display: flex;
+    flex-direction: row; /* Change to row for sidebar layout */
+    min-height: 100vh;
+    width: 100%; /* Take full width */
+}
+
+.mobile-header {
+    background-color: purple;
+    color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align items to the start */
+    position: fixed; /* Fixed header */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10; /* Ensure it's above other elements */
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+    margin-right: 20px; /* Add some spacing */
+    z-index: 11; /* Ensure it's above the menu */
+}
+
+.connect-wallet-button {
+    padding: 8px 12px;
+    background-color: white;
+    color: black;
+    border: 1px solid purple;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    position: absolute; /* Position to the right of the header */
+    top: 20px;
+    right: 35px;
+    z-index: 11; /* Ensure it's above the menu */
+}
+
+.connect-wallet-button:hover {
+    background-color: #e493fc;
+}
+
+.mobile-menu {
+    width: 250px;
+    height: 100vh;
+    background-color: #333;
+    color: white;
+    transition: transform 0.3s ease-in-out;
+    z-index: 5; /* Below the fixed header elements */
+    overflow-y: auto;
+    padding-top: 80px; /* To accommodate the header */
+    position: fixed; /* Fixed sidebar menu */
+    top: 0;
+    left: -250px; /* Initially hidden */
+}
+
+.mobile-menu.open {
+    transform: translateX(250px);
+}
+
+.menu-items {
+    padding: 10px;
+}
+
+.menu-item {
+    padding: 15px;
+    border-bottom: 1px solid #555;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.menu-item:hover {
+    background-color: #555;
+}
+
+.menu-item-error {
+    padding: 15px;
+    border-bottom: 1px solid #555;
+    color: red;
+    font-size: 0.9rem;
+}
+
+.menu-settings {
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-top: 1px solid #555;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu-settings:hover {
+    background-color: #555;
+}
+
+.mobile-content {
+    flex-grow: 1; /* Take remaining space */
+    padding: 20px;
+    padding-top: 70px; /* Adjust for fixed header */
+    margin-left: 0; /* Initial margin */
+    transition: margin-left 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the grid container */
+}
+
+.mobile-content.open {
+    margin-left: 250px; /* Push content when menu is open */
+}
+
+#tokenGridContainer {
+    padding-top: 2em;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 20px;
+    width: 90%; /* Adjust width as needed */
+    max-width: 1200px; /* Maximum width of the grid */
+}
+
+.grid-card {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    transition: box-shadow 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+    background-color: purple;
+    color: white;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 10px;
+    text-align: center;
+}
+
+.mdc-card__title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.mdc-card__subtitle {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.mdc-card__content {
+    font-size: 0.9rem;
+}
+
+.highlight-red {
+    background-color: #fff9c4;
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: right;
+    font-size: 18px;
+    color: black;
+}
+.badge > a {
+    background-color: gold;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    color: black;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.difference-line {
+    color: blue;
+    font-weight: bold;
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 15; /* Above everything */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#tokenList {
+    width: 100%;
+    min-height: 150px;
+}
+
+/* Hide the original pairData container */
+#pairData {
+    display: none !important;
+}
+
+.menu-item.selected {
+    background-color: purple;
+    color: white;
+    font-weight: bold;
+}
+
+.token-grid > h2 {
+    color: darkslategray;
+    text-align: center;
+}
+
+.page-subtitle {
+    font-size: 0.9rem;
+    color: grey;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0; /* Adjust as needed for positioning */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block; /* Optional: Show on hover as well */
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.badge {
+    /* Existing badge styles */
+    cursor: pointer; /* Indicate it's clickable */
+}
+
